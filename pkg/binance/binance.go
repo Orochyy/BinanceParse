@@ -2,8 +2,6 @@ package binance
 
 import (
 	"context"
-	"strconv"
-
 	"github.com/aiviaio/go-binance/v2"
 )
 
@@ -31,12 +29,4 @@ func (c *Client) GetSymbols() ([]string, error) {
 		symbols = append(symbols, info.Symbol)
 	}
 	return symbols, nil
-}
-
-func (c *Client) GetPrice(symbol string) (float64, error) {
-	price, err := c.client.NewListPricesService().Symbol(symbol).Do(context.Background())
-	if err != nil {
-		return 0, err
-	}
-	return strconv.ParseFloat(price[0].Price, 64)
 }
